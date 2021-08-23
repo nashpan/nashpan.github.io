@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OpenGL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OpenGL学习笔记第一部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL学习(part1)">
+<meta property="og:url" content="http://example.com/2021/08/22/OpenGL_part1/index.html">
+<meta property="og:site_name" content="爱吃桃的猴哥呀">
+<meta property="og:description" content="OpenGL学习笔记第一部分">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/nashpan/image-hosting/main/markdown_image/vao.png">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20210621234513817.png">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20210621234921181.png">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20210627150121914.png">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20210627171742372.png">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20210627174546788.png">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20210627182010687.png">
+<meta property="article:published_time" content="2021-08-22T03:38:59.000Z">
+<meta property="article:modified_time" content="2021-08-23T15:45:35.699Z">
+<meta property="article:author" content="nashpan">
+<meta property="article:tag" content="OpenGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/nashpan/image-hosting/main/markdown_image/vao.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/08/22/OpenGL_part1/"/>
+
+
+
+
+
+  <title>OpenGL学习(part1) | 爱吃桃的猴哥呀</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">爱吃桃的猴哥呀</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stand out, fit in</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/OpenGL_part1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/rocky.webp">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱吃桃的猴哥呀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL学习(part1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-22T11:38:59+08:00">
+                2021-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OpenGL学习笔记第一部分</p>
+<span id="more"></span>
+<h2 id="Hello-三角形-！">Hello,三角形 ！</h2>
+<h3 id="why-VBO">why VBO?</h3>
+<p>为什么要使用顶点缓冲对象呢（Vertex Buffer Objects, VBO）？</p>
+<p>定义这样的顶点数据以后，我们会把它作为输入发送给图形渲染管线的第一个处理阶段：顶点着色器。它会在GPU上创建内存用于储存我们的顶点数据，还要配置OpenGL如何解释这些内存，并且指定其如何发送给显卡。</p>
+<p>我们通过顶点缓冲对象(Vertex Buffer Objects, VBO)管理这个内存，它会在GPU内存（通常被称为显存）中储存大量顶点。使用这些缓冲对象的好处是我们可以一次性的发送一大批数据到显卡上，而不是每个顶点发送一次。<strong>从CPU把数据发送到显卡相对较慢，所以只要可能我们都要尝试尽量一次性发送尽可能多的数据。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用glGenBuffers函数和一个缓冲ID生成一个VBO对象：</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> VBO;</span><br><span class="line"><span class="built_in">glGenBuffers</span>(<span class="number">1</span>, &amp;VBO);</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用glBindBuffer函数把新创建的缓冲绑定到GL_ARRAY_BUFFER目标上,</span></span><br><span class="line"><span class="comment">//OpenGL有很多缓冲对象类型，顶点缓冲对象的缓冲类型是GL_ARRAY_BUFFER。</span></span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, VBO);</span><br></pre></td></tr></table></figure>
+<p>从这一刻起，我们使用的任何（<strong>在GL_ARRAY_BUFFER目标上的</strong>）缓冲调用都会用来配置当前绑定的缓冲(VBO)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用glBufferData函数，它会把之前定义的顶点数据复制到缓冲的内存中</span></span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, <span class="built_in"><span class="keyword">sizeof</span></span>(vertices), vertices, GL_STATIC_DRAW);</span><br></pre></td></tr></table></figure>
+<h3 id="链接顶点属性">链接顶点属性</h3>
+<p>我们已经把输入顶点数据发送给了GPU，但还没结束，**OpenGL还不知道它该如何解释内存中的顶点数据，以及它该如何将顶点数据链接到顶点着色器的属性上。**我们需要告诉OpenGL怎么做。</p>
+<p>所以有以下代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数指定我们要配置的顶点属性。</span></span><br><span class="line"><span class="comment">//第二个参数指定顶点属性的大小。</span></span><br><span class="line"><span class="comment">//最后一个参数：它表示位置数据在缓冲中起始位置的偏移量(Offset)。</span></span><br><span class="line"><span class="built_in">glVertexAttriPointer</span>(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//以顶点属性位置值作为参数，启用顶点属性；             need to attention please !!!</span></span><br><span class="line"><span class="built_in">glEnableVertexAttribArray</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>每个顶点属性从一个VBO管理的内存中获得它的数据，而具体是从哪个VBO（程序中可以有多个VBO）获取则是通过在调用glVertexAttribPointer时绑定到GL_ARRAY_BUFFER的VBO决定的。由于在调用glVertexAttribPointer之前绑定的是先前定义的VBO对象，顶点属性<code>0</code>现在会链接到它的顶点数据。</p>
+</blockquote>
+<h3 id="why-VAO">why VAO ?</h3>
+<p><strong><u><em>后续需要通过例子深入</em></u></strong></p>
+<blockquote>
+<p>顶点数组对象(Vertex Array Object, VAO)可以像顶点缓冲对象那样被绑定，任何随后的顶点属性调用都会储存在这个VAO中。这样的好处就是，当配置顶点属性指针时，你只需要将那些调用执行一次，之后再绘制物体的时候只需要绑定相应的VAO就行了。这使在不同顶点数据和属性配置之间切换变得非常简单，只需要绑定不同的VAO就行了。刚刚设置的所有状态都将存储在VAO中</p>
+</blockquote>
+<p>例如下面的实例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glUseProgram</span>(shaderProgramOrange);</span><br><span class="line"><span class="comment">// draw the first triangle using the data from our first VAO</span></span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAOs[<span class="number">0</span>]);</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_TRIANGLES, <span class="number">0</span>, <span class="number">3</span>);	</span><br><span class="line"></span><br><span class="line"><span class="comment">//draw the second triangle using the data from our second VAO</span></span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAOs[<span class="number">1</span>]);</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_TRIANGLES, <span class="number">0</span>, <span class="number">3</span>);  </span><br></pre></td></tr></table></figure>
+<p>VAO适用于管理VBO和EBO的</p>
+<p>下面这个例子更能说明用VAO的好处：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">glUseProgram(m_ProgramObj);</span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用 VBO 的绘制</span></span><br><span class="line">glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, (<span class="number">3</span>+<span class="number">3</span>)*sizeof(GLfloat), <span class="keyword">vertices</span>);</span><br><span class="line"></span><br><span class="line">glEnableVertexAttribArray(<span class="number">1</span>);</span><br><span class="line">glVertexAttribPointer(<span class="number">1</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, (<span class="number">3</span>+<span class="number">3</span>)*sizeof(GLfloat), (<span class="keyword">vertices</span> + <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">glDrawElements(GL_TRIANGLES, <span class="number">6</span>, GL_UNSIGNED_SHORT, indices);</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用 VBO 的绘制</span></span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[<span class="number">0</span>]);</span><br><span class="line">glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, (<span class="number">3</span>+<span class="number">3</span>)*sizeof(GLfloat), (<span class="keyword">const</span> <span class="type">void</span> *)<span class="number">0</span>);</span><br><span class="line">glEnableVertexAttribArray(<span class="number">1</span>);</span><br><span class="line">glVertexAttribPointer(<span class="number">1</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, (<span class="number">3</span>+<span class="number">3</span>)*sizeof(GLfloat), (<span class="keyword">const</span> <span class="type">void</span> *)(<span class="number">3</span> *sizeof(GLfloat)));</span><br><span class="line"></span><br><span class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VboIds[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">glDrawElements(GL_TRIANGLES, <span class="number">6</span>, GL_UNSIGNED_SHORT, (<span class="keyword">const</span> <span class="type">void</span> *)<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用VAO</span></span><br><span class="line"><span class="built_in">glUseProgram</span>(m_ProgramObj);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(m_VaoId);</span><br><span class="line"><span class="built_in">glDrawElements</span>(GL_TRIANGLES, <span class="number">6</span>, GL_UNSIGNED_SHORT, (<span class="keyword">const</span> <span class="keyword">void</span> *)<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/nashpan/image-hosting/main/markdown_image/vao.png" alt="vao"></p>
+<p>创建一个VAO</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> VAO;</span><br><span class="line"><span class="built_in">glGenVertexArrays</span>(<span class="number">1</span>, &amp;VAO);</span><br></pre></td></tr></table></figure>
+<p>要想使用VAO，要做的只是使用glBindVertexArray绑定VAO。从绑定之后起，我们应该绑定和配置对应的VBO和属性指针，之后解绑VAO供之后使用。当我们打算绘制一个物体的时候，我们只要在绘制物体前简单地把VAO绑定到希望使用的设定上就行了。这段代码应该看起来像这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..</span></span><br><span class="line"><span class="comment">// 1. 绑定VAO</span></span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAO);</span><br><span class="line"><span class="comment">// 2. 把顶点数组复制到缓冲中供OpenGL使用</span></span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, VBO);</span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, <span class="built_in"><span class="keyword">sizeof</span></span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line"><span class="comment">// 3. 设置顶点属性指针</span></span><br><span class="line"><span class="built_in">glVertexAttribPointer</span>(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line"><span class="built_in">glEnableVertexAttribArray</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//[...] </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ..:: 绘制代码（渲染循环中） :: ..</span></span><br><span class="line"><span class="comment">// 4. 绘制物体</span></span><br><span class="line"><span class="built_in">glUseProgram</span>(shaderProgram);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAO);   <span class="comment">// seeing as we only have a single VAO there&#x27;s no need to bind it every time, but we&#x27;ll do so to keep things a bit more organized</span></span><br><span class="line"><span class="built_in">someOpenGLFunctionThatDrawsOurTriangle</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="补充">补充</h3>
+<p><strong>使用两个着色程序</strong></p>
+<p>实例代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//using first program</span></span><br><span class="line"><span class="built_in">glUseProgram</span>(shaderProgramOrange);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAOs[<span class="number">0</span>]);</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_TRIANGLES, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//using second program</span></span><br><span class="line"><span class="built_in">glUseProgram</span>(shaderProgramYellow);</span><br><span class="line"><span class="built_in">glBindVertexArray</span>(VAOs[<span class="number">1</span>]);</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_TRIANGLES, <span class="number">0</span>, <span class="number">3</span>);	</span><br><span class="line"><span class="built_in">glfwSwapBuffers</span>(window);</span><br></pre></td></tr></table></figure>
+<h2 id="光照基础">光照基础</h2>
+<p>冯氏光照模型是其中常用的一个光照模型，它由三种元素光组成，分别是环境光(Ambient Lighting)、散射光(Diffuse Lighting)及镜面光(Specular Lighting)。</p>
+<h3 id="环境光">环境光</h3>
+<p><strong>环境光表示从四面八方照射到物体上且各个方向都均匀的光，不依赖于光源位置，没有方向性。</strong></p>
+<p>要把环境光照添加到场景里，只需用光的颜色乘以一个(数值)很小常量环境因子，再乘以物体的颜色，然后使用它作为片段的颜色：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">float</span> ambientStrength = <span class="number">1.0f</span>;  <span class="comment">//常量环境因子</span></span><br><span class="line">    vec3 ambient = ambientStrength * lightColor;  <span class="comment">//环境光强度</span></span><br><span class="line">    </span><br><span class="line">    vec3 result = ambient * objectColor;</span><br><span class="line">    color = <span class="built_in">vec4</span>(result, <span class="number">1.0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="散射光">散射光</h3>
+<p>**散射光表示从物体表面向各个方向均匀反射的光。**散射光的强度与入射光的强度及入射角密切相关，所以当光源位置发生变化，散射光效果也会发生明显变化。</p>
+<img src="C:\Users\panren\AppData\Roaming\Typora\typora-user-images\image-20210621234513817.png" alt="image-20210621234513817" style="zoom:80%;" />
+<p>其中入射角表示：当前片段光源照射方向与法向量之间的夹角。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">out vec3 fragPos;<span class="comment">//当前片段坐标</span></span><br><span class="line">out vec3 normal; <span class="comment">//当前片段法向量</span></span><br><span class="line">uniform vec3 lightPos;<span class="comment">//光源位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> diffuseStrength = <span class="number">0.5f</span>; <span class="comment">//材质反射系数</span></span><br><span class="line"></span><br><span class="line">    vec3 norm = <span class="built_in">normalize</span>(normal); <span class="comment">// 归一化            ？？？？？？？？？？？？？？？？？？？？？？？？？？？？</span></span><br><span class="line">    vec3 lightDir = <span class="built_in">normalize</span>(lightPos - fragPos);<span class="comment">//当前片段光源照射方向向量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">float</span> diff = <span class="built_in">max</span>(<span class="built_in">dot</span>(norm, lightDir), <span class="number">0.0</span>);<span class="comment">// dot 表示两个向量的点乘</span></span><br><span class="line">    vec3 diffuse = diffuseStrength * diff * lightColor; <span class="comment">//散射光最终强度</span></span><br><span class="line"></span><br><span class="line">    vec3 result = diffuse * objectColor;</span><br><span class="line">    color = <span class="built_in">vec4</span>(result, <span class="number">1.0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="镜面光">镜面光</h3>
+<p><strong>镜面光是由光滑物体表面反射的方向比较集中的光，镜面光强度不仅依赖于入射光与法向量的夹角，也依赖于观察者的位置。</strong></p>
+<img src="C:\Users\panren\AppData\Roaming\Typora\typora-user-images\image-20210621234921181.png" alt="image-20210621234921181" style="zoom:80%;" /> 
+<p>实现镜面光的片段着色器脚本：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">out vec3 fragPos;<span class="comment">//当前片段坐标</span></span><br><span class="line">out vec3 normal; <span class="comment">//当前片段法向量</span></span><br><span class="line">uniform vec3 lightPos;<span class="comment">//光源位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> specularStrength = <span class="number">0.5f</span>;</span><br><span class="line"></span><br><span class="line">    vec3 norm = <span class="built_in">normalize</span>(normal); <span class="comment">// 归一化</span></span><br><span class="line">    vec3 viewDir = <span class="built_in">normalize</span>(viewPos - FragPos); <span class="comment">//视线方向向量 </span></span><br><span class="line">    vec3 reflectDir = <span class="built_in">reflect</span>(-lightDir, norm); <span class="comment">//镜面反射光向量</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">float</span> spec = <span class="built_in">pow</span>(<span class="built_in">max</span>(<span class="built_in">dot</span>(viewDir, reflectDir), <span class="number">0.0</span>), <span class="number">32</span>);     <span class="comment">//????????????????????????????????????</span></span><br><span class="line">    <span class="comment">//视线方向向量与镜面反射光向量点乘的32次幂，这个32是高光的发光值(Shininess)。一个物体的发光值越高，反射光的能力越强，散射得越少，高光点越小。</span></span><br><span class="line">    vec3 specular = specularStrength * spec * lightColor; <span class="comment">//镜面光最终强度</span></span><br><span class="line"></span><br><span class="line">    vec3 result = specular * objectColor;</span><br><span class="line">    color = <span class="built_in">vec4</span>(result, <span class="number">1.0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="基础光照模型实现">基础光照模型实现</h3>
+<p>实现基础光照模型的顶点着色器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 300 es</span></span><br><span class="line">precision mediump <span class="keyword">float</span>;</span><br><span class="line"><span class="built_in">layout</span>(location = <span class="number">0</span>) in vec4 a_position;</span><br><span class="line"><span class="built_in">layout</span>(location = <span class="number">1</span>) in vec2 a_texCoord;</span><br><span class="line"><span class="built_in">layout</span>(location = <span class="number">2</span>) in vec3 a_normal;</span><br><span class="line">uniform mat4 u_MVPMatrix;</span><br><span class="line">uniform mat4 u_ModelMatrix;</span><br><span class="line">uniform vec3 lightPos;</span><br><span class="line">uniform vec3 lightColor;</span><br><span class="line">uniform vec3 viewPos;</span><br><span class="line">out vec2 v_texCoord;</span><br><span class="line">out vec3 ambient;</span><br><span class="line">out vec3 diffuse;</span><br><span class="line">out vec3 specular;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">gl_Position = u_MVPMatrix * a_position;</span><br><span class="line">vec3 fragPos = <span class="built_in">vec3</span>(u_ModelMatrix * a_position);             <span class="comment">//************************注意这里！！！！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Ambient</span></span><br><span class="line"><span class="keyword">float</span> ambientStrength = <span class="number">0.1</span>;</span><br><span class="line">ambient = ambientStrength * lightColor;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Diffuse</span></span><br><span class="line"><span class="keyword">float</span> diffuseStrength = <span class="number">0.5</span>;</span><br><span class="line">vec3 unitNormal = <span class="built_in">normalize</span>(<span class="built_in">vec3</span>(u_ModelMatrix * <span class="built_in">vec4</span>(a_normal, <span class="number">1.0</span>)));</span><br><span class="line">vec3 lightDir = <span class="built_in">normalize</span>(lightPos - fragPos);</span><br><span class="line"><span class="keyword">float</span> diff = <span class="built_in">max</span>(<span class="built_in">dot</span>(unitNormal, lightDir), <span class="number">0.0</span>);</span><br><span class="line">diffuse = diffuseStrength * diff * lightColor;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Specular</span></span><br><span class="line"><span class="keyword">float</span> specularStrength = <span class="number">0.9</span>;</span><br><span class="line">vec3 viewDir = <span class="built_in">normalize</span>(viewPos - fragPos);</span><br><span class="line">vec3 reflectDir = <span class="built_in">reflect</span>(-lightDir, unitNormal);</span><br><span class="line"><span class="keyword">float</span> spec = <span class="built_in">pow</span>(<span class="built_in">max</span>(<span class="built_in">dot</span>(unitNormal, reflectDir), <span class="number">0.0</span>), <span class="number">16.0</span>);</span><br><span class="line">specular = specularStrength * spec * lightColor;</span><br><span class="line">v_texCoord = a_texCoord;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应的片段着色器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 300 es</span></span><br><span class="line">precision mediump <span class="keyword">float</span>;</span><br><span class="line">in vec2 v_texCoord;</span><br><span class="line">in vec3 ambient;</span><br><span class="line">in vec3 diffuse;</span><br><span class="line">in vec3 specular;</span><br><span class="line"><span class="built_in">layout</span>(location = <span class="number">0</span>) out vec4 outColor;</span><br><span class="line">uniform sampler2D s_TextureMap;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">vec4 objectColor = <span class="built_in">texture</span>(s_TextureMap, v_texCoord);</span><br><span class="line">vec3 finalColor = (ambient + diffuse + specular) * <span class="built_in">vec3</span>(objectColor);</span><br><span class="line">outColor = <span class="built_in">vec4</span>(finalColor, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="着色器">着色器</h2>
+<h3 id="Uniform">Uniform</h3>
+<p>Uniform是一种从CPU中的应用向GPU中的着色器发送数据的方式，但uniform和顶点属性有些不同。首先，<strong>uniform是全局的(Global)</strong>。全局意味着uniform变量必须在每个着色器程序对象中都是独一无二的，而且它可以被着色器程序的任意着色器在任意阶段访问。第二，无论你把uniform值设置成什么，uniform会一直保存它们的数据，直到它们被重置或更新。</p>
+<blockquote>
+<p>如果你声明了一个uniform却在GLSL代码中没用过，编译器会静默移除这个变量，导致最后编译出的版本中并不会包含它，这可能导致几个非常麻烦的错误，记住这点！</p>
+</blockquote>
+<p>我们首先需要找到着色器中uniform属性的索引/位置值。当我们得到uniform的索引/位置值后，我们就可以更新它的值了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> vertexColorLocation = <span class="built_in">glGetUniformLocation</span>(shaderProgram, <span class="string">&quot;ourColor&quot;</span>);   <span class="comment">//找位置</span></span><br><span class="line"><span class="built_in">glUseProgram</span>(shaderProgram);   <span class="comment">// ******************************************这一步必须要，注意！！！！！</span></span><br><span class="line"><span class="built_in">glUniform4f</span>(vertexColorLocation, <span class="number">0.0f</span>, greenValue, <span class="number">0.0f</span>, <span class="number">1.0f</span>);   <span class="comment">//赋值</span></span><br></pre></td></tr></table></figure>
+<p>如果glGetUniformLocation返回<code>-1</code>就代表没有找到这个位置值。最后，我们可以通过glUniform4f函数设置uniform值。注意，查询uniform地址不要求你之前使用过着色器程序，<strong>但是更新一个uniform之前你必须先使用程序（调用glUseProgram)，因为它是在当前激活的着色器程序中设置uniform的。</strong></p>
+<h2 id="摄像机">摄像机</h2>
+<p><strong>OpenGL本身没有摄像机的概念</strong>，但我们可以通过把场景中的所有物体往相反方向移动的方式来<strong>模拟出摄像机</strong>，产生一种我们在移动的感觉，而不是场景在移动。</p>
+<img src="C:\Users\panren\AppData\Roaming\Typora\typora-user-images\image-20210627150121914.png" alt="image-20210627150121914" style="zoom:67%;" />
+<ul>
+<li><strong>摄像机位置</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glm::vec3 cameraPos = glm::<span class="built_in">vec3</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">3.0f</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不要忘记正z轴是从屏幕指向你的，如果我们希望摄像机向后移动，我们就沿着z轴的正方向移动。</p>
+</blockquote>
+<ul>
+<li><strong>摄像机方向</strong></li>
+</ul>
+<p>这里是指摄像机指向哪个方向。用场景原点向量减去场景位置向量就是摄像机的指向向量。由于我们知道摄像机指向z轴负方向，但我们希望方向向量(Direction Vector)指向摄像机的z轴正方向。如果我们交换相减的顺序，我们就会获得一个指向摄像机正z轴方向的向量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glm::vec3 cameraTarget = glm::<span class="built_in">vec3</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">glm::vec3 cameraDirection = glm::<span class="built_in">normalize</span>(cameraPos - cameraTarget);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>方向</strong>向量(Direction Vector)并不是最好的名字，因为它实际上指向从它到目标向量的相反方向</p>
+</blockquote>
+<ul>
+<li><strong>右轴</strong></li>
+</ul>
+<p>我们需要的另一个向量是一个<strong>右向量</strong>(Right Vector)，它代表摄像机空间的x轴的正方向。为获取右向量我们需要先使用一个小技巧：先定义一个<strong>上向量</strong>(Up Vector)。接下来把上向量和第二步得到的方向向量进行叉乘。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glm::vec3 up = glm::<span class="built_in">vec3</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">glm::vec3 cameraRight = glm::<span class="built_in">normaliaze</span>(glm::<span class="built_in">cross</span>(up, cameraDirection));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>上轴</strong></li>
+</ul>
+<p>现在我们已经有了x轴向量和z轴向量，获取一个指向摄像机的正y轴向量就相对简单了：我们把右向量和方向向量进行叉乘：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glm::vec3 cameraUP = glm::<span class="built_in">cross</span>(cameraDirection, cameraRight);</span><br></pre></td></tr></table></figure>
+<h3 id="Look-At">Look At</h3>
+<p>使用上面的相机向量就可以创建一个Look At矩阵了</p>
+<p>使用矩阵的好处之一是如果你使用3个相互垂直（或非线性）的轴定义了一个坐标空间，你可以用这3个轴外加一个平移向量来创建一个矩阵，并且你可以用这个矩阵乘以任何向量来将其变换到那个坐标空间。这正是<strong>LookAt</strong>矩阵所做的，现在我们有了3个相互垂直的轴和一个定义摄像机空间的位置坐标，我们可以创建我们自己的LookAt矩阵了：</p>
+<img src="C:\Users\panren\AppData\Roaming\Typora\typora-user-images\image-20210627171742372.png" alt="image-20210627171742372" style="zoom:67%;" />
+<p>其中RR是右向量，UU是上向量，DD是方向向量PP是摄像机位置向量。注意，位置向量是相反的，因为我们最终希望把世界平移到与我们自身移动的相反方向。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">glm::mat4 view;</span><br><span class="line">view = glm::<span class="built_in">lookAt</span>(glm::<span class="built_in">vec3</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">3.0f</span>),</span><br><span class="line">				glm::<span class="built_in">vec3</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>),</span><br><span class="line">				glm::<span class="built_in">vec3</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="深度测试">深度测试</h2>
+<p>深度缓冲就像颜色缓冲(Color Buffer)（储存所有的片段颜色：视觉输出）一样，在每个片段中储存了信息，并且（通常）和颜色缓冲有着一样的宽度和高度。深度缓冲是由窗口系统自动创建的，它会以16、24或32位float的形式储存它的深度值。在大部分的系统中，深度缓冲的精度都是24位的。</p>
+<p>当深度测试(Depth Testing)被启用的时候，OpenGL会将一个片段的深度值与深度缓冲的内容进行对比。OpenGL会执行一个深度测试，如果这个测试通过了的话，深度缓冲将会更新为新的深度值。如果深度测试失败了，片段将会被丢弃。</p>
+<p><strong>深度缓冲是在片段着色器运行之后（以及模板测试(Stencil Testing)运行之后）在屏幕空间中运行的</strong></p>
+<p>gl_FragCoord的x和y分量代表了片段的屏幕空间坐标（其中(0, 0)位于左下角）。**gl_FragCoord中也包含了一个z分量，它包含了片段真正的深度值。**z值就是需要与深度缓冲内容所对比的那个值。</p>
+<blockquote>
+<p>现在大部分的GPU都提供一个叫做提前深度测试(Early Depth Testing)的硬件特性。提前深度测试允许深度测试在片段着色器之前运行。只要我们清楚一个片段永远不会是可见的（它在其他物体之后），我们就能提前丢弃这个片段。</p>
+</blockquote>
+<p>深度测试默认是禁用的，所以如果要启用深度测试的话，我们需要用GL_DEPTH_TEST选项来启用它：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glEnable</span>(GL_DEPTH_TEST);</span><br></pre></td></tr></table></figure>
+<p>如果你启用了深度缓冲，你还应该在每个渲染迭代之前使用GL_DEPTH_BUFFER_BIT来清楚深度缓冲，否则你会仍使用上一次渲染迭代中的写入的深度值：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br></pre></td></tr></table></figure>
+<h3 id="深度冲突">深度冲突</h3>
+<h2 id="模板测试">模板测试</h2>
+<p>当片段着色器处理完一个片段之后，模板测试(Stencil Test)会开始执行，和深度测试一样，它也可能会丢弃片段。接下来，被保留的片段会进入深度测试，它可能会丢弃更多的片段。模板测试是根据又一个缓冲来进行的，它叫做模板缓冲(Stencil Buffer)，我们可以在渲染的时候更新它来获得一些很有意思的效果。</p>
+<p>**一个模板缓冲中，（通常）每个模板值(Stencil Value)是8位的。**所以每个像素/片段一共能有256种不同的模板值。我们可以将这些模板值设置为我们想要的值，然后当某一个片段有某一个模板值的时候，我们就可以选择丢弃或是保留这个片段了。</p>
+<p>模板缓冲的一个简单的例子如下：</p>
+<img src="C:\Users\panren\AppData\Roaming\Typora\typora-user-images\image-20210627174546788.png" alt="image-20210627174546788" style="zoom:67%;" />
+<p>模板缓冲首先会被清除为0，之后在模板缓冲中使用1填充了一个空心矩形。场景中的片段将会只在片段的模板值为1的时候会被渲染（其它的都被丢弃了）。</p>
+<p>模板缓冲操作允许我们在渲染片段时将模板缓冲设定为一个特定的值。通过在渲染时修改模板缓冲的内容，我们<strong>写入</strong>了模板缓冲。在同一个（或者接下来的）渲染迭代中，我们可以<strong>读取</strong>这些值，来决定丢弃还是保留某个片段。使用模板缓冲的时候你可以尽情发挥，但大体的步骤如下：</p>
+<ul>
+<li>启用模板缓冲的写入。</li>
+<li>渲染物体，更新模板缓冲的内容。</li>
+<li>禁用模板缓冲的写入。</li>
+<li>渲染（其它）物体，这次根据模板缓冲的内容丢弃特定的片段。</li>
+</ul>
+<p>可以启用GL_STENCIL_TEST来启用模板测试。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glEnable</span>(GL_STENCIL_TEST);</span><br></pre></td></tr></table></figure>
+<p><strong>注意，和颜色和深度缓冲一样，你也需要在每次迭代之前清除模板缓冲。</strong></p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);</span><br></pre></td></tr></table></figure>
+<p>和深度测试的glDepthMask函数一样，模板缓冲也有一个类似的函数。glStencilMask允许我们设置一个位掩码(Bitmask)，它会与将要写入缓冲的模板值进行与(AND)运算。默认情况下设置的位掩码所有位都为1，不影响输出，但如果我们将它设置为<code>0x00</code>，写入缓冲的所有模板值最后都会变成0.这与深度测试中的glDepthMask(GL_FALSE)是等价的。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glStencilMask(<span class="number">0xFF</span>); <span class="comment">// 每一位写入模板缓冲时都保持原样</span></span><br><span class="line">glStencilMask(<span class="number">0x00</span>); <span class="comment">// 每一位在写入模板缓冲时都会变成0（禁用写入）</span></span><br></pre></td></tr></table></figure>
+<h3 id="模板函数">模板函数</h3>
+<p>和深度测试一样，我们对模板缓冲应该通过还是失败，以及它应该如何影响模板缓冲，也是有一定控制的。一共有两个函数能够用来配置模板测试：glStencilFunc和glStencilOp。</p>
+<h3 id="物体轮廓">物体轮廓</h3>
+<p><strong>理解其思想，关键在于那个缩放来实现轮廓：</strong></p>
+<p>为物体创建轮廓的步骤如下：</p>
+<ol>
+<li>在绘制（需要添加轮廓的）物体之前，将模板函数设置为GL_ALWAYS，每当物体的片段被渲染时，将模板缓冲更新为1。</li>
+<li>渲染物体。</li>
+<li>禁用模板写入以及深度测试。</li>
+<li>将每个物体缩放一点点。</li>
+<li>使用一个不同的片段着色器，输出一个单独的（边框）颜色。</li>
+<li>再次绘制物体，但只在它们片段的模板值不等于1时才绘制。</li>
+<li>再次启用模板写入和深度测试。</li>
+</ol>
+<img src="C:\Users\panren\AppData\Roaming\Typora\typora-user-images\image-20210627182010687.png" alt="image-20210627182010687" style="zoom:67%;" /> 
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/22/C-%E5%9F%BA%E7%A1%80/" rel="prev" title="C++基础">
+                C++基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/rocky.webp"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-%E4%B8%89%E8%A7%92%E5%BD%A2-%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">Hello,三角形 ！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#why-VBO"><span class="nav-number">1.1.</span> <span class="nav-text">why VBO?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%E9%A1%B6%E7%82%B9%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">链接顶点属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#why-VAO"><span class="nav-number">1.3.</span> <span class="nav-text">why VAO ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">1.4.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">光照基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%85%89"><span class="nav-number">2.1.</span> <span class="nav-text">环境光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%B0%84%E5%85%89"><span class="nav-number">2.2.</span> <span class="nav-text">散射光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E9%9D%A2%E5%85%89"><span class="nav-number">2.3.</span> <span class="nav-text">镜面光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.4.</span> <span class="nav-text">基础光照模型实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9D%80%E8%89%B2%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">着色器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Uniform"><span class="nav-number">3.1.</span> <span class="nav-text">Uniform</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%84%E5%83%8F%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">摄像机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Look-At"><span class="nav-number">4.1.</span> <span class="nav-text">Look At</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">深度测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%86%B2%E7%AA%81"><span class="nav-number">5.1.</span> <span class="nav-text">深度冲突</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">模板测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0"><span class="nav-number">6.1.</span> <span class="nav-text">模板函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E4%BD%93%E8%BD%AE%E5%BB%93"><span class="nav-number">6.2.</span> <span class="nav-text">物体轮廓</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nashpan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
