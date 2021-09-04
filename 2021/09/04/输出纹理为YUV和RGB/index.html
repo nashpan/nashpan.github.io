@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="输出纹理为YUV 和RGB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="输出纹理为YUV和RGB">
+<meta property="og:url" content="http://example.com/2021/09/04/%E8%BE%93%E5%87%BA%E7%BA%B9%E7%90%86%E4%B8%BAYUV%E5%92%8CRGB/index.html">
+<meta property="og:site_name" content="爱吃桃的猴哥呀">
+<meta property="og:description" content="输出纹理为YUV 和RGB">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-09-04T05:53:23.000Z">
+<meta property="article:modified_time" content="2021-09-04T06:25:09.132Z">
+<meta property="article:author" content="nashpan">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/09/04/输出纹理为YUV和RGB/"/>
+
+
+
+
+
+  <title>输出纹理为YUV和RGB | 爱吃桃的猴哥呀</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">爱吃桃的猴哥呀</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stand out, fit in</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/04/%E8%BE%93%E5%87%BA%E7%BA%B9%E7%90%86%E4%B8%BAYUV%E5%92%8CRGB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/rocky.webp">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱吃桃的猴哥呀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">输出纹理为YUV和RGB</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-04T13:53:23+08:00">
+                2021-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS%E6%96%B0%E6%89%8B%E6%9D%91/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS新手村</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="输出纹理为YUV-和RGB">输出纹理为YUV 和RGB</h2>
+<span id="more"></span>
+<p>写这篇博客，是因为我在使用OpenGL ES渲染从视频获取的纹理时(使用YUV的方式)，出现了颜色偏差的问题，但是我仔细看了我的代码，采样坐标，参数设置等都没有问题，然后我也学习了别人的相关代码，发现使用的方式都是一样的，因此被这个问题卡主了，于是只好换一种方式了，因此借鉴了下面这篇文章的设置方法，将视频输出数据直接设置为RGB，解决了颜色偏差的问题</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1141269">AVPlayer初体验之视频解纹理</a></p>
+</blockquote>
+<h3 id="1-YUV纹理">1.YUV纹理</h3>
+<p>由于视频的编码格式基本都是YUV420，然后苹果的<a target="_blank" rel="noopener" href="https://developer.apple.com/library/archive/samplecode/AVBasicVideoOutput/Listings/AVBasicVideoOutput_APLEAGLView_m.html#//apple_ref/doc/uid/DTS40013109-AVBasicVideoOutput_APLEAGLView_m-DontLinkElementID_6">demo代码</a>中通过AVPlayerItemVideoOutput获取Y-Pannel和 UV-Pannel 两张纹理，最后在Shader中对两种纹理组合处理。</p>
+<p>设置<code>AVPlayerItemVideoOutput</code>的部分代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *pixBuffAttributes = @&#123;(<span class="keyword">id</span>)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)&#125;;</span><br><span class="line"><span class="keyword">self</span>.videoOutput = [[<span class="built_in">AVPlayerItemVideoOutput</span> alloc] initWithPixelBufferAttributes:pixBuffAttributes];</span><br></pre></td></tr></table></figure>
+<p>输出纹理的部分代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Y-Plane</span></span><br><span class="line">glActiveTexture(GL_TEXTURE0);</span><br><span class="line">err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _videoTextureCache, pixelBuffer, <span class="literal">NULL</span>, GL_TEXTURE_2D, GL_RED_EXT, frameWidth, frameHeight, GL_RED_EXT, GL_UNSIGNED_BYTE, <span class="number">0</span>, &amp;_lumaTexture);</span><br><span class="line"><span class="comment">//UV-plane</span></span><br><span class="line">glActiveTexture(GL_TEXTURE1);</span><br><span class="line">err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _videoTextureCache, pixelBuffer, <span class="literal">NULL</span>, GL_TEXTURE_2D, GL_RG_EXT, frameWidth / <span class="number">2</span>, frameHeight / <span class="number">2</span>, GL_RG_EXT, GL_UNSIGNED_BYTE, <span class="number">1</span>, &amp;_chromaTexture);</span><br></pre></td></tr></table></figure>
+<p>其中的<code>kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange</code>是CoreVideo中指定的<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/corevideo/1563591-pixel_format_identifiers?language=objc">Pixel Format Identifiers</a> 类型，在<code>OpenGLES2</code>环境下其对应的参数是<code>GL_RED_EXT</code>和<code>GL_RG_EXT</code>。</p>
+<h3 id="2-RGB纹理">2.RGB纹理</h3>
+<p>首先要明白一点，上图中明确说明，<code>BGRA</code>的输出格式是<code>420v</code>的两倍多带宽(<em>More than 2x bandwidth</em>)，并且在该图来源,WWDC的<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2011/419/">这个视频</a>的<code>27:00</code>位置明确说明420v的输出格式效率会明显高于BGRA的输出格式(<em>It does come across if you can avoid using BGRA and doing your work in YUV, it’s more efficient from bandwidth standpoint</em>),但是反过来，对于OpenGL来说，两张纹理的性能又会低于一张纹理。而且直接使用使用<code>BGRA</code>毕竟会方便很多，因为输出的直接就是一张纹理。但是现在毕竟都iOS11时代了，所以影响可以忽略不计。</p>
+<p>设置<code>AVPlayerItemVideoOutput</code>的代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *pixBuffAttributes = @&#123;(<span class="keyword">id</span>)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32BGRA)&#125;;</span><br><span class="line"><span class="keyword">self</span>.videoOutput = [[<span class="built_in">AVPlayerItemVideoOutput</span> alloc] initWithPixelBufferAttributes:pixBuffAttributes];</span><br></pre></td></tr></table></figure>
+<p>输出纹理的代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CVReturn textureRet = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, <span class="keyword">self</span>.videoTextureCache, pixelBuffer, <span class="literal">nil</span>, GL_TEXTURE_2D, GL_RGBA, width, height, GL_BGRA, GL_UNSIGNED_BYTE, <span class="number">0</span>, &amp;_textureOutput);</span><br></pre></td></tr></table></figure>
+<p><code>BGRA</code>对应的输出格式是<code>kCVPixelFormatType_32BGRA</code>,其对应的从Buffer读纹理的参数是<code>GL_RGBA</code>和<code>GL_BGRA</code>。</p>
+<blockquote>
+<p>2021.9.3</p>
+<p>后面想了一下，我是输出到一个CALayer上的，CALayer上也有默认的颜色显示方式，应该是这一项不匹配导致的，因为当时的bug是颜色偏蓝，偏红(我试着改变了输出的RGB值时出现的现象)，可能是这个原因，因为当时没有考虑到这一点，后面如果遇到类似问题，试着查一下显示Layer的显示方式。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/09/04/shader-noise/" rel="next" title="shader noise">
+                <i class="fa fa-chevron-left"></i> shader noise
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/09/04/Metal%E4%B8%AD%E5%8A%A0%E8%BD%BDMTLLibrary/" rel="prev" title="Metal中加载MTLLibrary">
+                Metal中加载MTLLibrary <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/rocky.webp"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%BA%B9%E7%90%86%E4%B8%BAYUV-%E5%92%8CRGB"><span class="nav-number">1.</span> <span class="nav-text">输出纹理为YUV 和RGB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-YUV%E7%BA%B9%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">1.YUV纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RGB%E7%BA%B9%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">2.RGB纹理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nashpan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
