@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shader," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="shader基本用法总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shader介绍">
+<meta property="og:url" content="http://example.com/2023/05/14/shader%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="爱吃桃的猴哥呀">
+<meta property="og:description" content="shader基本用法总结">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4ooooia27cs0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6mwney17yqk0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3yl1khhw3b00.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6d2rqxyrgq00.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/c0afb7c7-ad91-427b-878a-d7967a5d15d3.2dxd0t8qnz40.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.19yzzfokpbr4.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.5hxd4298hjg0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.68rou7uosh40.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2mnd30zvrw80.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4r38h4j83720.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.25hsp6rmak80.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6l552wxuyp00.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.1iy25plo5nvk.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/1.58bk40zkisw0.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/2.43s81uxpc900.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/3.2970omykd3gg.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.28tbyxrx6tus.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/4.10eklxiyfou8.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.38hljol6hle0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.31u4tqtqfya0.webp">
+<meta property="og:image" content="c:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20230514185339709.png">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/5.79leqhys3280.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.1mbgs1elp11c.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/6.1q8gsml6aexs.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/7.1bqb88wkd89s.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.5tx13g88hs40.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.1oqer3erzu74.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.7dsnegk2zr80.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2rd7bnt6ut8.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3sghfjkaxgo0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.7ghxkhwd4q80.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3nrpt49koba0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2j86nqc9x020.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.694l71jtb4k0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2nfbs2zop7m0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6wq57o3xzs.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.gvqie82f40o.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.7ce4yv3c1800.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2aaekdlimp1c.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6ttyltgldm80.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3dytl7kab920.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3g446js1c5u0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4gytix99njs0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.704q25ekllc0.webp">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/8.373haivhp600.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/9.6oga687i1xc0.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/10.2g0l6csob89w.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/11.pzbqp854000.gif">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4j53kcu7cew0.webp">
+<meta property="article:published_time" content="2023-05-14T09:48:35.000Z">
+<meta property="article:modified_time" content="2023-05-14T14:56:44.320Z">
+<meta property="article:author" content="nashpan">
+<meta property="article:tag" content="shader">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4ooooia27cs0.webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/05/14/shader介绍/"/>
+
+
+
+
+
+  <title>shader介绍 | 爱吃桃的猴哥呀</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">爱吃桃的猴哥呀</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stand out, fit in</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/14/shader%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/rocky.webp">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱吃桃的猴哥呀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shader介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-05-14T17:48:35+08:00">
+                2023-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shader/" itemprop="url" rel="index">
+                    <span itemprop="name">shader</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="shader基本用法总结">shader基本用法总结</h2>
+<span id="more"></span>
+<h3 id="1-Shader-基本介绍">1. Shader 基本介绍</h3>
+<p>首先需要认识到的一点是，shader是运行在GPU上的，天然的<strong>并行处理</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4ooooia27cs0.webp" alt="image"></p>
+<p>我们通过编写代码(即shader），<strong>来‘点亮’下面画布中的每个像素</strong>！</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6mwney17yqk0.webp" alt="image"></p>
+<p>右边列出这么长的公式不是为了劝退大家，它都是由基本图形公式组合而来（后面我会给大家进行讲解），理解了就容易，但是一下子放在这里就很难理解，所以大家在写shader复合效果代码时，<strong>一定要写注释说明</strong>，不然后面优化维护的同学是真的难受😭</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// create 100x100 cell sheet</span></span><br><span class="line">    <span class="type">float</span> c = <span class="built_in">floor</span>(<span class="number">100.0</span>*(<span class="number">0.5</span>+(fragCoord.x<span class="number">-0.5</span>*iResolution.x)/iResolution.y));</span><br><span class="line">    <span class="type">float</span> r = <span class="built_in">floor</span>(<span class="number">100.0</span>*(<span class="number">1.0</span>-fragCoord.y/iResolution.y));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// paint flower</span></span><br><span class="line">    <span class="type">float</span> f = <span class="built_in">min</span>(<span class="built_in">max</span>(<span class="number">20.0</span>+<span class="number">20.0</span>*(<span class="built_in">pow</span>(<span class="number">0.5</span>+<span class="number">0.5</span>*<span class="built_in">cos</span>(<span class="number">5.0</span>*<span class="built_in">atan</span>(r<span class="number">-50.5</span>,c<span class="number">-50.5</span>)),<span class="number">0.3</span>))-<span class="built_in">sqrt</span>((c<span class="number">-50.5</span>)*(c<span class="number">-50.5</span>)+(r<span class="number">-50.5</span>)*(r<span class="number">-50.5</span>)),<span class="number">0.0</span>),<span class="number">1.0</span>);</span><br><span class="line">    f += <span class="built_in">min</span>(<span class="built_in">max</span>(<span class="number">19.0</span>-<span class="built_in">sqrt</span>((c<span class="number">-50.5</span>)*(c<span class="number">-50.5</span>)+(r<span class="number">-50.5</span>)*(r<span class="number">-50.5</span>)),<span class="number">0.0</span>),<span class="number">1.0</span>);</span><br><span class="line">    f -= <span class="number">2.0</span>*<span class="built_in">min</span>(<span class="built_in">max</span>(<span class="number">46.0</span>-r,<span class="number">0.0</span>),<span class="number">1.0</span>)*<span class="built_in">min</span>(<span class="built_in">max</span>(<span class="number">2.0</span>-<span class="built_in">abs</span>(<span class="number">4.0</span>-<span class="built_in">sqrt</span>( <span class="built_in">pow</span>(<span class="built_in">abs</span>(r<span class="number">-45.0</span>),<span class="number">2.0</span>)+<span class="built_in">pow</span>(<span class="built_in">abs</span>(<span class="built_in">abs</span>(c<span class="number">-50.5</span>)<span class="number">-6.0</span>),<span class="number">2.0</span>))),<span class="number">0.0</span>),<span class="number">1.0</span>);</span><br><span class="line">    f -= <span class="number">2.0</span>*<span class="built_in">min</span>(<span class="built_in">max</span>(r<span class="number">-50.</span>  </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="number">0</span>,<span class="number">0.0</span>),<span class="number">1.0</span>)*<span class="built_in">min</span>(<span class="built_in">max</span>(<span class="number">2.0</span>-<span class="built_in">abs</span>(<span class="number">8.0</span>-<span class="built_in">sqrt</span>((c<span class="number">-50.5</span>)*(c<span class="number">-50.5</span>)+(r<span class="number">-50.5</span>)*(r<span class="number">-50.5</span>))),<span class="number">0.0</span>),<span class="number">1.0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// colorize</span></span><br><span class="line">    <span class="type">vec3</span> h = (f&lt;<span class="number">1.0</span>) ? <span class="built_in">mix</span>(<span class="type">vec3</span>(<span class="number">0.44</span>,<span class="number">0.66</span>,<span class="number">0.86</span>),<span class="type">vec3</span>(<span class="number">1</span>),f) :</span><br><span class="line">                       <span class="built_in">mix</span>(<span class="type">vec3</span>(<span class="number">1</span>), <span class="type">vec3</span>(<span class="number">1</span>,<span class="number">0.85</span>,<span class="number">0.4</span>),f<span class="number">-1.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// output</span></span><br><span class="line">    fragColor = <span class="type">vec4</span>(h,<span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-how-to-write-a-shader">1.1 how to write a shader ?</h4>
+<ul>
+<li>
+<p><strong>我们在哪儿作画？</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.shadertoy.com/new">https://www.shadertoy.com/new</a></li>
+<li>VS Code 插件shadertoy, 使用方法也比较简单</li>
+</ul>
+</li>
+<li>
+<p><strong>一些基本知识介绍</strong></p>
+</li>
+<li>
+<p>从哪儿开始呢？画一个三角形貌似有点难(PS：图形学中的hello world就是绘制一个三角形🔼)，那就从点亮屏幕开始吧 ！</p>
+</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// shader具有一些内置函数：</span></span><br><span class="line"><span class="comment">//     iResolution :  画布的精度，宽高参数</span></span><br><span class="line"><span class="comment">//     iTime       :  时间参数，让效果动起来</span></span><br><span class="line"><span class="comment">//     iMouse      :  鼠标操作，交互设计</span></span><br><span class="line"><span class="comment">//     工具函数     :  sin, cos, pow, mod, smoothstep, floor等</span></span><br><span class="line"> <span class="type">void</span> mainImage(<span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord)</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// 将画布归一化到0.0到1.0之间</span></span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;   </span><br><span class="line"></span><br><span class="line">    <span class="comment">//           输出颜色，即对应uv下的颜色值</span></span><br><span class="line">    <span class="comment">//                r     g    b   a</span></span><br><span class="line">    fragColor = <span class="type">vec4</span>(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 对应图2</span></span><br><span class="line">    <span class="comment">// fragColor = vec4(uv.x, 0.0, 0.0, 1.0);</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 对应图3</span></span><br><span class="line">    <span class="comment">// vec3 color = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4)); </span></span><br><span class="line">    <span class="comment">// fragColor = vec4(color, 1.0);</span></span><br><span class="line">&#125;      </span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3yl1khhw3b00.webp" alt="image" style="zoom:80%;" /><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6d2rqxyrgq00.webp" alt="image"><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/c0afb7c7-ad91-427b-878a-d7967a5d15d3.2dxd0t8qnz40.gif" alt="c0afb7c7-ad91-427b-878a-d7967a5d15d3" style="zoom:40%;" /></p>
+<p>​                    图一                                                         图二                                                             图三</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.19yzzfokpbr4.webp" alt="image"></p>
+<h4 id="1-2-generative-art">1.2 generative art</h4>
+<h5 id="1-2-1-形状">1.2.1 形状</h5>
+<ul>
+<li><strong>善于使用step 和smoothstep函数</strong></li>
+</ul>
+<p>​     <a target="_blank" rel="noopener" href="https://thebookofshaders.com/glossary/?search=step"> step 函数</a>：一般用来作截断处理</p>
+<p>​      <a target="_blank" rel="noopener" href="https://thebookofshaders.com/glossary/?search=smoothstep">smoothstep函数</a>：一般用来做平滑处理，smoothstep函数可以替代step函数（参数1等于参数2，或者接近时，可以理解为step函数）</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord/iResolution.xy;</span><br><span class="line">    uv = uv - <span class="number">0.5</span>;</span><br><span class="line">     </span><br><span class="line">    <span class="type">vec3</span> color = <span class="type">vec3</span>(<span class="number">0.7</span>, <span class="number">0.4</span>, <span class="number">0.6</span>);</span><br><span class="line">    <span class="keyword">if</span> (uv.x &lt; <span class="number">-.3</span> &amp;&amp; uv.y &gt;<span class="number">0.1</span>)</span><br><span class="line">        color = <span class="type">vec3</span>(<span class="number">0.7</span>, <span class="number">0.0</span>, <span class="number">.0</span>);</span><br><span class="line">    <span class="keyword">if</span> (uv.x &gt; <span class="number">0.2</span> &amp;&amp; uv.y &lt; <span class="number">-0.4</span>)</span><br><span class="line">        color = <span class="type">vec3</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="keyword">if</span> (uv.x &gt; <span class="number">0.4</span> &amp;&amp; uv.y &gt; <span class="number">0.1</span>)</span><br><span class="line">        color = <span class="type">vec3</span>(<span class="number">0.0</span>, <span class="number">0.5</span>, <span class="number">0.6</span>);</span><br><span class="line">        </span><br><span class="line">    <span class="type">float</span> r = <span class="number">0.01</span>;</span><br><span class="line">    color *= <span class="built_in">step</span>(r, <span class="built_in">abs</span>(uv.x + <span class="number">0.3</span>));</span><br><span class="line">    color *= <span class="built_in">step</span>(r, <span class="built_in">abs</span>(uv.x - <span class="number">0.2</span>));</span><br><span class="line">    color *= <span class="built_in">step</span>(r, <span class="built_in">abs</span>(uv.x - <span class="number">0.4</span>));</span><br><span class="line">    color *= <span class="number">1.0</span> -(<span class="number">1.0</span> - <span class="built_in">step</span>(r, <span class="built_in">abs</span>(uv.x + <span class="number">0.4</span>))) * (<span class="built_in">smoothstep</span>(<span class="number">0.1</span>, <span class="number">0.1</span>, uv.y));</span><br><span class="line">    color *= <span class="built_in">step</span>(r * <span class="number">2.</span>, <span class="built_in">abs</span>(uv.y - <span class="number">0.1</span>));</span><br><span class="line">    color *= <span class="built_in">step</span>(r * <span class="number">2.</span>, <span class="built_in">abs</span>(uv.y - <span class="number">0.3</span>));</span><br><span class="line">    color *= <span class="number">1.0</span> - (<span class="number">1.0</span> - <span class="built_in">step</span>(r * <span class="number">2.</span>, <span class="built_in">abs</span>(uv.y + <span class="number">0.4</span>))) * <span class="built_in">smoothstep</span>(<span class="number">-0.3</span>, <span class="number">-0.3</span>, uv.x);     </span><br><span class="line">   </span><br><span class="line">    fragColor = <span class="type">vec4</span>(color,<span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.5hxd4298hjg0.webp" alt="image" style="zoom:80%;" />                                     <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.68rou7uosh40.webp" alt="image"></p>
+<p>​              参考示意图                                                                                            运行代码图</p>
+<ul>
+<li><strong>SDF(符号距离场）</strong></li>
+</ul>
+<blockquote>
+<p>详细可参考文档<a target="_blank" rel="noopener" href="https://quvideo.feishu.cn/docs/doccnhRzxWM8QLgecBYUCFik30c">Signed Distance Field</a></p>
+</blockquote>
+<p>在这一部分，使用最频繁的函数是 length(), 其它具有同样功能的有sqrt(),distance()</p>
+<p>这里主要是掌握距离场这种思想！！！</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;</span><br><span class="line">    <span class="comment">// 将坐标原点移到中心</span></span><br><span class="line">    uv = uv - <span class="number">0.5</span>;</span><br><span class="line">    <span class="comment">// 保持原来的长宽比</span></span><br><span class="line">    uv.x *= iResolution.x / iResolution.y;</span><br><span class="line">    <span class="type">vec3</span> color = <span class="type">vec3</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算当前像素到原点的距离</span></span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">length</span>(uv);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 设置比较对象，这里即圆的半径</span></span><br><span class="line">    <span class="type">float</span> r = <span class="number">0.3</span>;</span><br><span class="line">    color *= <span class="built_in">smoothstep</span>(r, r + <span class="number">0.01</span>, d);</span><br><span class="line">    </span><br><span class="line">    fragColor = <span class="type">vec4</span>(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>如果没有保持长宽比的话，可能显示的是一个椭圆，因为图形被拉伸了！</strong></li>
+<li>这里的smoothstep这一行可以理解为：小于r，返回0.0值，color乘以0.0等于0.0，显示黑色；大于r，则返回1.0.保持color值，既保持背景色</li>
+</ol>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2mnd30zvrw80.webp" alt="image"></p>
+<p>​                                                                                         结果图</p>
+<ul>
+<li><strong>极坐标</strong></li>
+</ul>
+<p>​         这一方面主要用来生成齿轮，花瓣等沿着圆周变化的形状，因为是以角度为自变量，所以atan()函数基本上一定会用到(当我们看到别人的shader里面有atan函数时，可以往角度方向去想一下)</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;</span><br><span class="line">    <span class="comment">// 将坐标原点移到中心</span></span><br><span class="line">    uv = uv - <span class="number">0.5</span>;</span><br><span class="line">    <span class="comment">// 保持原来的长宽比</span></span><br><span class="line">    uv.x *= iResolution.x / iResolution.y;</span><br><span class="line">    <span class="type">vec3</span> color = <span class="type">vec3</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算当前像素到原点的距离</span></span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">length</span>(uv);</span><br><span class="line">    <span class="type">float</span> r = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ****************   added  *************</span></span><br><span class="line">    <span class="comment">// 设置比较对象，这里添加角度的变化项</span></span><br><span class="line">    r = <span class="number">0.3</span> + <span class="number">0.1</span> * <span class="built_in">cos</span>(<span class="number">6.0</span> * <span class="built_in">atan</span>(uv.y, uv.x));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 对应第二个图</span></span><br><span class="line">    <span class="comment">// r = 0.3 + 0.1 * abs(cos(6.0 * atan(uv.y, uv.x)));</span></span><br><span class="line">    <span class="comment">// 对应第三个图</span></span><br><span class="line">    <span class="comment">// r = 0.3 + 0.1 * smoothstep(-.5, 0.4, cos(8.0 * atan(uv.y, uv.x)));</span></span><br><span class="line">    <span class="comment">// ****************   added  *************</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    color *= <span class="built_in">smoothstep</span>(r, r + <span class="number">0.01</span>, d);</span><br><span class="line">    </span><br><span class="line">    fragColor = <span class="type">vec4</span>(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4r38h4j83720.webp" alt="image" style="zoom:67%;" />   <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.25hsp6rmak80.webp" alt="image" style="zoom:67%;" />     <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6l552wxuyp00.webp" alt="image" style="zoom:67%;" /></p>
+<p>​                 图一                                                   图二                                                      图三</p>
+<h5 id="1-2-2-图形的基本操作">1.2.2 图形的基本操作</h5>
+<p>主要包括平移，旋转，缩放</p>
+<p>旋转矩阵</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.1iy25plo5nvk.webp" alt="image"></p>
+<p><strong>注意：</strong></p>
+<p>​        缩放，旋转是有参考点的，下面的两个矩阵都是针对原点进行计算的，如果不在原点，需要先平移到原点，然后进行旋转，缩放操作，然后再平移到原先的位置。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#define PI 3.14159265359</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 旋转矩阵</span></span><br><span class="line"><span class="type">mat2</span> rotate2d(<span class="type">float</span> _angle)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">mat2</span>(<span class="built_in">cos</span>(_angle),-<span class="built_in">sin</span>(_angle),</span><br><span class="line">                <span class="built_in">sin</span>(_angle),<span class="built_in">cos</span>(_angle));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缩放矩阵</span></span><br><span class="line"><span class="type">mat2</span> scale(<span class="type">vec2</span> _scale)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">mat2</span>(_scale.x,<span class="number">0.0</span>,</span><br><span class="line">                <span class="number">0.0</span>,_scale.y);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;</span><br><span class="line">    <span class="comment">// 将坐标原点移到中心</span></span><br><span class="line">    uv = uv - <span class="number">0.5</span>;</span><br><span class="line">    <span class="comment">// 保持原来的长宽比</span></span><br><span class="line">    uv.x *= iResolution.x / iResolution.y;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ****************   added  *************</span></span><br><span class="line">    <span class="comment">// 平移</span></span><br><span class="line">    uv += (<span class="built_in">sin</span>(iTime), <span class="built_in">cos</span>(iTime)) * <span class="number">0.2</span>;</span><br><span class="line">    <span class="comment">// 旋转</span></span><br><span class="line">    <span class="comment">// uv *= rotate2d( sin(iTime)*PI );</span></span><br><span class="line">    <span class="comment">// 缩放</span></span><br><span class="line">    <span class="comment">// uv *= scale( vec2(0.8 + abs(sin(iTime)) * 0.5) );</span></span><br><span class="line">    <span class="comment">// ****************   added  *************</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">vec3</span> color = <span class="type">vec3</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算当前像素到原点的距离</span></span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">length</span>(uv);</span><br><span class="line">    <span class="type">float</span> r = <span class="number">0.0</span>;</span><br><span class="line">    r = <span class="number">0.3</span> + <span class="number">0.1</span> * <span class="built_in">smoothstep</span>(<span class="number">-.5</span>, <span class="number">0.4</span>, <span class="built_in">cos</span>(<span class="number">8.0</span> * <span class="built_in">atan</span>(uv.y, uv.x)));</span><br><span class="line">    color *= <span class="built_in">smoothstep</span>(r, r + <span class="number">0.01</span>, d);</span><br><span class="line">   </span><br><span class="line">    fragColor = <span class="type">vec4</span>(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/1.58bk40zkisw0.gif" alt="1" style="zoom: 33%;" />               <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/2.43s81uxpc900.gif" alt="2" style="zoom:33%;" />              <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/3.2970omykd3gg.gif" alt="3" style="zoom:33%;" /></p>
+<p>​            图一                                                                图二                                                           图三</p>
+<h5 id="1-2-3-重复，分形">1.2.3 重复，分形</h5>
+<ul>
+<li><strong>重复</strong></li>
+</ul>
+<p>​        如果我们绘制多个相同的图案，那么可以采取下面的想法：我们的画布是归一化到0.0到1.0，如果我们将画布划分若干份，然后将每一部分的坐标重新映射到0.0到1.0，那么我们在一个画布上绘制的图案就会被同步到其它区域上，从而实现了重复图形的绘制。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ****************   added  *************</span></span><br><span class="line">    <span class="comment">// 实现重复部分的代码    </span></span><br><span class="line">    uv = uv * <span class="number">3.0</span>;</span><br><span class="line">    uv = <span class="built_in">fract</span>(uv);</span><br><span class="line">    <span class="comment">// ****************   added  *************  </span></span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 将坐标原点移到中心</span></span><br><span class="line">    uv = uv - <span class="number">0.5</span>;</span><br><span class="line">    <span class="comment">// 保持原来的长宽比</span></span><br><span class="line">    uv.x *= iResolution.x / iResolution.y;</span><br><span class="line">    </span><br><span class="line">    <span class="type">vec3</span> color = <span class="type">vec3</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算当前像素到原点的距离</span></span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">length</span>(uv);</span><br><span class="line">    <span class="type">float</span> r = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">    r = <span class="number">0.3</span> + <span class="number">0.1</span> * <span class="built_in">smoothstep</span>(<span class="number">-.5</span>, <span class="number">0.4</span>, <span class="built_in">cos</span>(<span class="number">8.0</span> * <span class="built_in">atan</span>(uv.y, uv.x)));</span><br><span class="line">    </span><br><span class="line">    color *= <span class="built_in">smoothstep</span>(r, r + <span class="number">0.01</span>, d);</span><br><span class="line">    </span><br><span class="line">    fragColor = <span class="type">vec4</span>(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.28tbyxrx6tus.webp" alt="image"></p>
+<ul>
+<li><strong>分形</strong></li>
+</ul>
+<p>主要用于模拟树木，山脉，树叶等等具有自相似的物体</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    <span class="type">vec2</span> complex_sqr(<span class="type">vec2</span> pos)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">vec2</span>(<span class="built_in">pow</span>(pos.x, <span class="number">2.0</span>) - <span class="built_in">pow</span>(pos.y, <span class="number">2.0</span>), pos.x * pos.y * <span class="number">2.0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord/iResolution.xy;</span><br><span class="line"></span><br><span class="line">    <span class="type">vec2</span> c = <span class="type">vec2</span>(<span class="number">-0.8</span>, <span class="built_in">cos</span>(iTime) * <span class="number">0.2</span>);</span><br><span class="line">    <span class="type">vec2</span> z = <span class="type">vec2</span>(uv.x * <span class="number">2.0</span> - <span class="number">1.0</span>, uv.y - <span class="number">0.5</span>) * <span class="number">2.0</span>;</span><br><span class="line">    <span class="type">float</span> iterations = <span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">length</span>(z) &lt; <span class="number">20.</span> &amp;&amp; iterations &lt; <span class="number">50.</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        z = complex_sqr(z) + c;</span><br><span class="line">        iterations += <span class="number">1.</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">vec3</span> col = <span class="type">vec3</span>(<span class="number">1.</span> - iterations * <span class="number">0.02</span>);</span><br><span class="line">    </span><br><span class="line">    fragColor = <span class="type">vec4</span>(col,<span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/4.10eklxiyfou8.gif" alt="4" style="zoom:50%;" />                                <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.38hljol6hle0.webp" alt="image" style="zoom:95%;" /></p>
+<h5 id="1-1-4-随机">1.1.4 随机</h5>
+<p>​         通过上面的一些方法，我们可以生成一些规则的图形，如齿轮，花瓣等等；规则代表着一种美，数学之美，而无序则代表着自由，有无限的想象空间，比如天上的云朵，跳动的火苗，海平面溅起的浪花等，这些自然之物无法用数学公式来把它们限制在一个方程式之下。那只能用魔法去打败魔法了，是随机去模拟大自然的随机，noise就是这门艺术。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://nashpan.github.io/2021/09/04/shader-noise/#more">shader noise</a></p>
+</blockquote>
+<h4 id="1-3-image">1.3 image</h4>
+<h5 id="1-3-1-贴图">1.3.1 贴图</h5>
+<p>这个比较简单，就是将现有的图片 导入到 我们的画布中，使用函数texture2D即可</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入你的图片，下面的路径是我的文件路径</span></span><br><span class="line"><span class="meta">#iChannel0 &#x27;file://pictures/46.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = <span class="built_in">gl_FragCoord</span>.xy / iResolution.xy;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 对你的纹理进行采样，获取对应像素处的颜色</span></span><br><span class="line">    <span class="type">vec4</span> color = <span class="built_in">texture2D</span>(iChannel0, uv);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出到屏幕，即为原图</span></span><br><span class="line">    <span class="built_in">gl_FragColor</span> = color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.31u4tqtqfya0.webp" alt="image">    <img src="C:/Users/panren/AppData/Roaming/Typora/typora-user-images/image-20230514185339709.png" alt="image-20230514185339709"></p>
+<p>​                     原图                                                             运行代码图</p>
+<h5 id="1-3-2-玩转图片">1.3.2 玩转图片</h5>
+<ul>
+<li><strong>图片转场</strong></li>
+</ul>
+<p>说到图片，大家最先想到的特效是啥？我首先想到的是各种转场</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://gl-transitions.com/gallery">https://gl-transitions.com/gallery</a></p>
+</blockquote>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#iChannel0 &#x27;file://pictures/1.png&#x27;</span></span><br><span class="line"><span class="meta">#iChannel1 &#x27;file://pictures/46.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> SQRT_2 = <span class="number">1.414213562373</span>;</span><br><span class="line"><span class="type">float</span> dots = <span class="number">20.0</span>;</span><br><span class="line"><span class="type">vec2</span> center = <span class="type">vec2</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">vec4</span> transition(<span class="type">vec2</span> uv) &#123;</span><br><span class="line">  <span class="type">bool</span> nextImage = <span class="built_in">distance</span>(<span class="built_in">fract</span>(uv * dots), <span class="type">vec2</span>(<span class="number">0.5</span>, <span class="number">0.5</span>)) &lt; ( <span class="built_in">fract</span>(iTime * <span class="number">0.4</span>) / <span class="built_in">distance</span>(uv, center));</span><br><span class="line">  <span class="keyword">return</span> nextImage ? <span class="built_in">texture2D</span>(iChannel0, uv) : <span class="built_in">texture2D</span>(iChannel1, uv);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = <span class="built_in">gl_FragCoord</span>.xy / iResolution.xy;</span><br><span class="line">    <span class="type">vec4</span> color = <span class="type">vec4</span>(<span class="number">0.0</span>);</span><br><span class="line">    color = transition(uv);</span><br><span class="line">    <span class="built_in">gl_FragColor</span> = color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/5.79leqhys3280.gif" alt="5" style="zoom: 33%;" />
+<ul>
+<li><strong>制作精灵动画</strong></li>
+</ul>
+<p>​          这一部分是为了说明，对于一幅图片，我们可以只选择其中一部分进行采样；(ps: 文字渲染的一种方式是将所有文字信息离屏渲染到一张纹理上，使用时去查找对应的部分进行渲染）</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#iChannel0 &#x27;file://pictures/1.png&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> col = <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> row = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> main() &#123;</span><br><span class="line">    <span class="type">vec2</span> uv = <span class="built_in">gl_FragCoord</span>.xy / iResolution.xy;</span><br><span class="line">    <span class="type">vec4</span> color = <span class="type">vec4</span>(<span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">vec2</span> fRes = iResolution.xy / <span class="type">vec2</span>(<span class="type">float</span>(col), <span class="type">float</span>(row));</span><br><span class="line">    <span class="type">vec2</span> nRes = iResolution.xy / fRes;</span><br><span class="line">    uv = uv / nRes;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> timeX = iTime * <span class="number">1.5</span>;</span><br><span class="line">    <span class="type">float</span> timeY = <span class="built_in">floor</span>(timeX / <span class="type">float</span>(col));</span><br><span class="line">    <span class="type">vec2</span> <span class="keyword">offset</span> = <span class="type">vec2</span> (<span class="built_in">floor</span>(timeX) / nRes.x, <span class="number">1.</span> - (<span class="built_in">floor</span>(timeY) / nRes.y));</span><br><span class="line"></span><br><span class="line">    uv = <span class="built_in">fract</span>(uv + <span class="keyword">offset</span>);</span><br><span class="line"></span><br><span class="line">    color = <span class="built_in">texture2D</span>(iChannel0, uv);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gl_FragColor</span> = color;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 进阶：第三个是抖音上比较火的网格分割图片，配合音乐的卡点</span></span><br><span class="line">    <span class="comment">//      来显示图片，从而产生比较有趣的效果</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//     我们可以基于此的思想 来将我们的众多图片按照不同时间</span></span><br><span class="line">    <span class="comment">//  绘制到画布上形成动画！！！</span></span><br><span class="line">          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.1mbgs1elp11c.webp" alt="image" style="zoom:80%;" />               <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/6.1q8gsml6aexs.gif" alt="6" style="zoom: 30%;" />                   <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/7.1bqb88wkd89s.gif" alt="7" style="zoom: 67%;" /></p>
+<p>​                     原图                                                         运行代码图                                                抖音特效</p>
+<h5 id="1-3-3-图片操作">1.3.3 图片操作</h5>
+<ul>
+<li><strong>反转图片</strong></li>
+</ul>
+<p>​          下面这个图片看起来好像有点阴间的感觉，反转操作可用于通道中颜色较小的值反转成较大的值，然后用于处理，或者相反，是一种数据处理的思想（类似于将数据重新映射，类比于笛卡尔坐标到极坐标，或者从极坐标映射到笛卡尔坐标系），常用的颜色处理还有颜色空间的转换，如RGB颜色空间转换到HSV颜色空间，都是利用了这种思想</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入你的图片，下面的路径是我的文件路径</span></span><br><span class="line"><span class="meta">#iChannel0 &#x27;file://pictures/46.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = <span class="built_in">gl_FragCoord</span>.xy / iResolution.xy;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意这里，这里我只取rgb通道的颜色，因为a通道不用反转</span></span><br><span class="line">    <span class="type">vec3</span> color = <span class="built_in">texture2D</span>(iChannel0, uv).rgb;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 进行反转的操作</span></span><br><span class="line">    color = <span class="number">1.0</span> - color;</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">gl_FragColor</span> = <span class="type">vec4</span>(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.5tx13g88hs40.webp" alt="image">                               <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.1oqer3erzu74.webp" alt="image" style="zoom:95%;" /></p>
+<p>​               原图                                                                                     效果图</p>
+<ul>
+<li><strong>图片灰度化</strong></li>
+</ul>
+<p>​        记住这个数字 035911， 即0.3， 0.59， 0.11 (大概是这个比例，有的是0.299, 0.587, 0.114 或者其它，都是按照这个基准进行灰度化的，PS软件的灰度图就是按照这个比例进行灰度化的）</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入你的图片，下面的路径是我的文件路径</span></span><br><span class="line"><span class="meta">#iChannel0 &#x27;file://pictures/46.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = <span class="built_in">gl_FragCoord</span>.xy / iResolution.xy;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意这里，这里我只取rgb通道的颜色，因为a通道不用反转</span></span><br><span class="line">    <span class="type">vec3</span> color = <span class="built_in">texture2D</span>(iChannel0, uv).rgb;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 进行灰度的处理</span></span><br><span class="line">    <span class="type">float</span> grey = color.r * <span class="number">0.3</span> + color.g * <span class="number">0.59</span> + color.b * <span class="number">0.11</span>;</span><br><span class="line">    color = <span class="type">vec3</span>(grey);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">gl_FragColor</span> = <span class="type">vec4</span>(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.7dsnegk2zr80.webp" alt="image">                              <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2rd7bnt6ut8.webp" alt="image"></p>
+<p>​                      原图                                                                               效果图</p>
+<ul>
+<li>颜色的加减乘除</li>
+</ul>
+<p>​          这一块对应于AE 或者PS中的 叠加方式，有Add, Substract, Multiply, Average, Difference等等，因为这一块没有发现比较好玩的效果，暂时不深入，一般常用的就是Add方式就可，即colorA + colorB的方式。</p>
+<h5 id="1-3-4-卷积，算子">1.3.4 卷积，算子</h5>
+<ul>
+<li>
+<p>模糊操作</p>
+<p>主要用到的是**高斯模糊，**其它的还有均值模糊，径向模糊等等，各有各的用途，按照需求选择合适即可。</p>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/125744132">高品质后处理：十种图像模糊算法的总结与实现</a></p>
+</blockquote>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3sghfjkaxgo0.webp" alt="image"></p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.7ghxkhwd4q80.webp" alt="image"></p>
+<ul>
+<li>边缘检测</li>
+</ul>
+<p>​          边缘的表现形式如下图：<strong>通常是通过寻找图像的梯度来检测边界</strong>，有两种代表算法，sobel算子（基于一阶导数的）和laplacian算子（基于二阶导数）。</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3nrpt49koba0.webp" alt="image"></p>
+<ol>
+<li><strong>sobel 算子</strong></li>
+</ol>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2j86nqc9x020.webp" alt="image"></p>
+<p>对于不连续的函数，一阶导数可以写作：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.694l71jtb4k0.webp" alt="image"></p>
+<p>或</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2nfbs2zop7m0.webp" alt="image"></p>
+<p>所以有：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6wq57o3xzs.webp" alt="image"></p>
+<p>假设要处理的图像为I，在两个方向求导：</p>
+<p>水平变化：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.gvqie82f40o.webp" alt="image"></p>
+<p>垂直变化：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.7ce4yv3c1800.webp" alt="image"></p>
+<p>结合以上两个结果求出：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.2aaekdlimp1c.webp" alt="image"></p>
+<p>统计极大值所在的位置，就是图像的边缘。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#iChannel0 &#x27;file://pictures/pixel.png&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;</span><br><span class="line">    <span class="type">vec3</span> col;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*** Sobel kernels ***/</span></span><br><span class="line">    <span class="comment">// Note: GLSL&#x27;s mat3 is COLUMN-major -&gt;  mat3[col][row]</span></span><br><span class="line">    <span class="type">mat3</span> sobelX = <span class="type">mat3</span>(<span class="number">-1.0</span>, <span class="number">-2.0</span>, <span class="number">-1.0</span>,</span><br><span class="line">                       <span class="number">0.0</span>,  <span class="number">0.0</span>, <span class="number">0.0</span>,</span><br><span class="line">                       <span class="number">1.0</span>,  <span class="number">2.0</span>,  <span class="number">1.0</span>);</span><br><span class="line">    <span class="type">mat3</span> sobelY = <span class="type">mat3</span>(<span class="number">-1.0</span>,  <span class="number">0.0</span>,  <span class="number">1.0</span>,</span><br><span class="line">                       <span class="number">-2.0</span>,  <span class="number">0.0</span>, <span class="number">2.0</span>,</span><br><span class="line">                       <span class="number">-1.0</span>,  <span class="number">0.0</span>,  <span class="number">1.0</span>);  </span><br><span class="line">    </span><br><span class="line">    <span class="type">float</span> sumX = <span class="number">0.0</span>;   <span class="comment">// x-axis change</span></span><br><span class="line">    <span class="type">float</span> sumY = <span class="number">0.0</span>;   <span class="comment">// y-axis change</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">-1</span>; i &lt;= <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">-1</span>; j &lt;= <span class="number">1</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// texture coordinates should be between 0.0 and 1.0</span></span><br><span class="line">            <span class="type">float</span> x = (fragCoord.x + <span class="type">float</span>(i))/iResolution.x;   </span><br><span class="line">            <span class="type">float</span> y =  (fragCoord.y + <span class="type">float</span>(j))/iResolution.y;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Convolve kernels with image</span></span><br><span class="line">            sumX += <span class="built_in">length</span>(<span class="built_in">texture</span>( iChannel0, <span class="type">vec2</span>(x, y) ).xyz) * <span class="type">float</span>(sobelX[<span class="number">1</span>+i][<span class="number">1</span>+j]);</span><br><span class="line">            sumY += <span class="built_in">length</span>(<span class="built_in">texture</span>( iChannel0, <span class="type">vec2</span>(x, y) ).xyz) * <span class="type">float</span>(sobelY[<span class="number">1</span>+i][<span class="number">1</span>+j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">float</span> g = <span class="built_in">abs</span>(sumX) + <span class="built_in">abs</span>(sumY);</span><br><span class="line">    <span class="comment">//g = sqrt((sumX*sumX) + (sumY*sumY));</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(g &gt; <span class="number">1.0</span>)</span><br><span class="line">        col = <span class="type">vec3</span>(<span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        col = col * <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">    fragColor.xyz = col;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.6ttyltgldm80.webp" alt="image"></p>
+<p>​                                                   原图                                                                                  运行算法图</p>
+<p>2.<strong>laplacian算子</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3dytl7kab920.webp" alt="image"></p>
+<p>对于不连续函数的二阶导数是：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.3g446js1c5u0.webp" alt="image"></p>
+<p>因此使用的卷积核是：</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4gytix99njs0.webp" alt="image"></p>
+<h3 id="2-Shader-和-AI">2. Shader 和 AI</h3>
+<h4 id="2-1-特效相关">2.1 特效相关</h4>
+<ul>
+<li>瘦脸特效，大眼特效，头部晃动特效等等</li>
+</ul>
+<p>​        <strong>这里会使用AI的方法提取人物的关键点</strong>，如下图中的左右太阳穴的关键点，下巴的关键点，人体头部的关键点等等，然后再加上图像处理的方法，就会产生很多有趣的效果！！！</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.704q25ekllc0.webp" alt="image" style="zoom: 50%;" />        <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/8.373haivhp600.gif" alt="8" style="zoom: 50%;" /></p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/9.6oga687i1xc0.gif" alt="9" style="zoom: 50%;" />       <img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/10.2g0l6csob89w.gif" alt="10" style="zoom: 58%;" /></p>
+<ul>
+<li>背景特效</li>
+</ul>
+<p>​         这里就会用到AI中的人像分割技术，将人物抠出来，然后背景部分将其灰度化，人物部分保留原始的颜色即可。</p>
+<p><img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/11.pzbqp854000.gif" alt="11"></p>
+<h4 id="2-2-DLSS">2.2 DLSS</h4>
+<blockquote>
+<p>​	<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/116211994">DLSS 2.0 - 重新定义AI渲染</a></p>
+</blockquote>
+<p>​          DLSS简单来说就是我们使用传统的图形学方法渲染一帧低清晰度的图片，然后使用AI的方法将其“复原”成高分辨率的图片，即图片的高清修复。因为在真实感方面，光线追踪技术渲染的真实感很好，但是在高分辨率下，计算量爆炸；有了DLSS后，我们可以使用光线追踪技术渲染低分辨率的图片，然后使用AI进行高清修复。</p>
+<img src="https://cdn.staticaly.com/gh/nashpan/image-hosting@main/image-hosing/image.4j53kcu7cew0.webp" alt="image" style="zoom:80%;" />
+<h3 id="参考资料">参考资料</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/426092206">浅谈生成艺术</a></li>
+<li><a target="_blank" rel="noopener" href="https://thebookofshaders.com/">the book of shaders</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.shadertoy.com/">shadertoy</a></li>
+<li><a target="_blank" rel="noopener" href="https://iquilezles.org/">iq大神博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/Ms2SD1">https://www.shadertoy.com/view/Ms2SD1</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shader/" rel="tag"># shader</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/17/%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90%E9%97%AE%E9%A2%98/" rel="next" title="数据对齐问题">
+                <i class="fa fa-chevron-left"></i> 数据对齐问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/rocky.webp"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shader%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">shader基本用法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Shader-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1. Shader 基本介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-how-to-write-a-shader"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 how to write a shader ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-generative-art"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 generative art</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1-%E5%BD%A2%E7%8A%B6"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1.2.1 形状</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-2-%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">1.2.2 图形的基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-3-%E9%87%8D%E5%A4%8D%EF%BC%8C%E5%88%86%E5%BD%A2"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">1.2.3 重复，分形</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-4-%E9%9A%8F%E6%9C%BA"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">1.1.4 随机</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-image"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 image</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1-%E8%B4%B4%E5%9B%BE"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1.3.1 贴图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2-%E7%8E%A9%E8%BD%AC%E5%9B%BE%E7%89%87"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">1.3.2 玩转图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-3-%E5%9B%BE%E7%89%87%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">1.3.3 图片操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-4-%E5%8D%B7%E7%A7%AF%EF%BC%8C%E7%AE%97%E5%AD%90"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">1.3.4 卷积，算子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Shader-%E5%92%8C-AI"><span class="nav-number">1.2.</span> <span class="nav-text">2. Shader 和 AI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E7%89%B9%E6%95%88%E7%9B%B8%E5%85%B3"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 特效相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-DLSS"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 DLSS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nashpan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
